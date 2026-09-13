@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0e15">
+    <meta name="description" content="NeuraStage - The Staging Ground for AI-Ready Data">
+    <title>NeuraStage | AI Data Pipeline</title>
+    
+    <!-- PWA Manifest Inline Data URI -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"NeuraStage","short_name":"NeuraStage","start_url":".","display":"standalone","background_color":"#0d0e15","theme_color":"#00f2fe","icons":[{"src":"https://img.icons8.com/neon/512/flash-on.png","sizes":"512x512","type":"image/png"}]}'>
+
+    <style>
+        :root {
+            --bg-color: #090a0f;
+            --card-bg: rgba(18, 20, 31, 0.65);
+            --card-border: rgba(0, 242, 254, 0.18);
+            --neon-cyan: #00f2fe;
+            --neon-purple: #9d4edd;
+            --neon-green: #00ff87;
+            --text-main: #f0f3f8;
+            --text-muted: #8a94a6;
+            --code-bg: #06070a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.08) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .brand-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-banner p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        textarea, pre {
+            width: 100%;
+            height: 380px;
+            background: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #33ff00;
+            font-family: "Fira Code", Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-y: auto;
+            resize: none;
+            outline: none;
+        }
+
+        pre {
+            color: var(--neon-cyan);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        textarea:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: #fff;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--neon-green);
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-logo">NS</div>
+            <div class="brand-title">NeuraStage</div>
+        </div>
+        <div class="badge">PWA Engine v1.0</div>
+    </header>
+
+    <main>
+        <div class="hero-banner">
+            <h1>AI Data Staging & Pipeline Sanitizer</h1>
+            <p>Transform dirty, unstructured imports into clean, deterministic JSON ready for RAG & LLMs.</p>
+        </div>
+
+        <div class="workspace">
+            <!-- RAW INPUT PANEL -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">Raw Unstructured Import</span>
+                    <button style="background:none; border:none; color:var(--neon-cyan); cursor:pointer; font-size:0.8rem" onclick="loadSample()">Load Sample</button>
+                </div>
+                <textarea id="rawInput" placeholder="Paste messy HTML, unstructured text, or noisy JSON payload here..."></textarea>
+            </div>
+
+            <!-- CLEANED OUTPUT PANEL -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">NeuraStage Vector Payload</span>
+                    <span id="statusTag" style="color:var(--text-muted); font-size:0.8rem">Awaiting Ingestion</span>
+                </div>
+                <pre id="cleanOutput">// Cleaned, chunked JSON payload will appear here...</pre>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="processPipeline()">Run NeuraStage Pipeline</button>
+        </div>
+
+        <!-- LIVE PIPELINE STATS -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-val" id="noiseStat">0%</div>
+                <div class="stat-lbl">Noise Reduction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val" id="tokenStat">0</div>
+                <div class="stat-lbl">Tokens Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val" id="structStat">Ready</div>
+                <div class="stat-lbl">Payload Structure</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const sampleRaw = `
+        <div class="ad-banner">BUY NOW! SPECIAL OFFER</div>
+        <h1>   Customer Report: Quarterly Analytics   </h1>
+        <script>console.log("tracker script");</script>
+        <p>The client performance in <b>Q3 2026</b> reached <b>$1.2M</b> in revenue.</p>
+        <p>Contact Email: john.doe@example.com (PII Flagged)</p>
+        <div class="footer-links">Privacy | Terms | Unsubscribe</div>
+        `;
+
+        function loadSample() {
+            document.getElementById('rawInput').value = sampleRaw.trim();
+        }
+
+        function processPipeline() {
+            const raw = document.getElementById('rawInput').value;
+            if (!raw) return;
+
+            document.getElementById('statusTag').innerText = "Processing...";
+            document.getElementById('statusTag').style.color = "var(--neon-cyan)";
+
+            setTimeout(() => {
+                // 1. Strip HTML tags & inline scripts
+                let cleanedText = raw.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+                cleanedText = cleanedText.replace(/<[^>]+>/g, ' ');
+                cleanedText = cleanedText.replace(/\s+/g, ' ').trim();
+
+                // 2. Mock PII Removal & Structure Extraction
+                const hasEmail = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi.test(cleanedText);
+                const sanitizedContent = cleanedText.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi, '[REDACTED_EMAIL]');
+
+                // 3. Construct Vector-Ready JSON Payload
+                const resultPayload = {
+                    pipeline_id: "ns_" + Math.random().toString(36).substr(2, 9),
+                    timestamp: new Date().toISOString(),
+                    metadata: {
+                        source: "raw_import",
+                        quality_score: 0.98,
+                        pii_scrubbed: hasEmail
+                    },
+                    vector_chunks: [
+                        {
+                            chunk_id: "chk_01",
+                            tokens_approx: Math.ceil(sanitizedContent.length / 4),
+                            text_payload: sanitizedContent
+                        }
+                    ]
+                };
+
+                // Render JSON Output
+                document.getElementById('cleanOutput').textContent = JSON.stringify(resultPayload, null, 2);
+
+                // Update Stats
+                const rawLength = raw.length;
+                const cleanLength = sanitizedContent.length;
+                const reduction = Math.max(0, Math.round(((rawLength - cleanLength) / rawLength) * 100));
+                const savedTokens = Math.max(0, Math.ceil((rawLength - cleanLength) / 4));
+
+                document.getElementById('noiseStat').innerText = reduction + "%";
+                document.getElementById('tokenStat').innerText = savedTokens;
+                document.getElementById('structStat').innerText = "Deterministic";
+                document.getElementById('statusTag').innerText = "Staged & Clean";
+                document.getElementById('statusTag').style.color = "var(--neon-green)";
+            }, 300);
+        }
+
+        // --- Inline Service Worker Registration for PWA Functionality ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+                    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                    self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(swUrl).catch(err => console.log('SW setup skipped'));
+            });
+        }
+    </script>
+</body>
+</html>
