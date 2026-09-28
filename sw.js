@@ -1,5 +1,5 @@
 /* NeuraStage service worker — cache-first, offline capable */
-const CACHE = 'neurastage-v1';
+const CACHE = 'neurastage-v2';
 const ASSETS = [
   './',
   './index.html',

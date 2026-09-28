@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090a0f">
-<meta name="description" content="NeuraStage — turn your company data into AI-ready format. Strip noise, redact PII, and export clean, chunked JSON ready for RAG and LLMs. Free tool by Toastid Tech.">
-<title>NeuraStage — Turn Company Data Into AI-Ready Format</title>
+<meta name="description" content="NeuraStage — turn your company customer data into AI-ready format. Import CSVs, map columns, redact PII, export clean chunked JSON for RAG and LLMs. By Toastid Tech.">
+<title>NeuraStage — Turn Customer Data Into AI-Ready Format</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="NeuraStage — AI-Ready Data, Staged in Seconds">
-<meta property="og:description" content="Paste messy company data. Get clean, PII-scrubbed, chunked JSON ready for RAG and LLMs. Free.">
+<meta property="og:title" content="NeuraStage — AI-Ready Customer Data in Seconds">
+<meta property="og:description" content="Import your customer CSV, map the columns, and export PII-scrubbed, chunked JSON ready for RAG and LLMs.">
 <meta property="og:image" content="assets/neurastage-logo.jpg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJXTN8EDT4"></script>
 <script>
@@ -26,8 +26,8 @@ gtag('config', 'G-DJXTN8EDT4');
   "name": "NeuraStage",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Turn your company data into AI-ready format. Strip noise, redact PII, and export clean, chunked JSON ready for RAG and LLMs."
+  "offers": { "@type": "Offer", "price": "79.99", "priceCurrency": "USD" },
+  "description": "Turn your company customer data into AI-ready format. Import CSVs, map columns, redact PII, export chunked JSON for RAG and LLMs."
 }
 </script>
 <style>
@@ -46,14 +46,18 @@ header{padding:1rem 2rem;display:flex;justify-content:space-between;align-items:
 .brand-title{font-size:1.35rem;font-weight:700;letter-spacing:-.5px}
 .brand-title .stage{color:var(--cyan)}
 .badge{background:rgba(0,242,254,.1);border:1px solid var(--cyan);color:var(--cyan);font-size:.72rem;padding:.3rem .7rem;border-radius:20px;font-weight:600}
+.pro-badge{background:rgba(0,255,135,.1);border:1px solid var(--green);color:var(--green);font-size:.72rem;padding:.3rem .7rem;border-radius:20px;font-weight:700;display:none}
 main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:2.5rem 1.5rem}
-.hero{text-align:center;margin-bottom:2.5rem}
+.hero{text-align:center;margin-bottom:2rem}
 .hero img{width:150px;height:150px;border-radius:24px;box-shadow:0 0 40px rgba(0,242,254,.35);margin-bottom:1rem}
 .hero h1{font-size:2.2rem;letter-spacing:-1px;margin-bottom:.5rem}
 .hero h1 .accent{background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:680px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;backdrop-filter:blur(8px)}
 .card h2{font-size:1.15rem;margin-bottom:1rem;color:var(--cyan)}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.tab{flex:1;text-align:center;padding:.8rem;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--muted);font-weight:700;cursor:pointer}
+.tab.active{background:rgba(0,242,254,.1);border-color:var(--cyan);color:var(--cyan)}
 textarea{width:100%;min-height:170px;background:var(--code);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--text);padding:1rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;resize:vertical}
 textarea:focus{outline:none;border-color:var(--cyan)}
 .btn-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
@@ -73,6 +77,32 @@ pre#cleanOutput{background:var(--code);border:1px solid rgba(255,255,255,.08);bo
 .status-dot{width:10px;height:10px;border-radius:50%;background:var(--muted)}
 .status-dot.live{background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.5}}
+.map-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.map-table th,.map-table td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid rgba(255,255,255,.07);font-size:.88rem}
+.map-table th{color:var(--muted);font-weight:600}
+.map-table select{background:var(--code);color:var(--text);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.5rem;width:100%}
+.map-table .hdr{font-family:ui-monospace,monospace;color:var(--cyan)}
+.checkbox-row{display:flex;align-items:center;gap:.6rem;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.checkbox-row input{width:18px;height:18px;accent-color:var(--cyan)}
+.trial-note{background:rgba(157,78,221,.1);border:1px solid var(--purple);border-radius:10px;padding:.9rem 1.1rem;margin-top:1rem;font-size:.88rem;color:var(--text);display:none}
+.trial-note a{color:var(--cyan);font-weight:700;cursor:pointer}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.tier{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.tier.pro{border-color:var(--green);box-shadow:0 0 25px rgba(0,255,135,.12)}
+.tier h3{font-size:1.1rem;margin-bottom:.25rem}
+.tier .price{font-size:2rem;font-weight:800;margin:.5rem 0}
+.tier .price small{font-size:.85rem;color:var(--muted);font-weight:400}
+.tier ul{list-style:none;margin:1rem 0;color:var(--muted);font-size:.9rem}
+.tier ul li{margin:.45rem 0;padding-left:1.4rem;position:relative}
+.tier ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:50;padding:1rem}
+.modal-bg.open{display:flex}
+.modal{background:#11131c;border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:440px;width:100%;text-align:center}
+.modal h2{margin-bottom:.5rem}
+.modal p{color:var(--muted);font-size:.9rem;margin-bottom:1.25rem}
+.modal .price-big{font-size:2.4rem;font-weight:800;color:var(--green);margin:.5rem 0}
+.modal input{width:100%;background:var(--code);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:var(--text);padding:.8rem;margin:.5rem 0;font-size:1rem;text-align:center;letter-spacing:2px}
+.modal .fine{font-size:.75rem;color:var(--muted);margin-top:1rem}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .how .step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
 .how .step .n{font-size:1.8rem;font-weight:800;color:var(--purple)}
@@ -85,6 +115,7 @@ footer{padding:2rem;text-align:center;color:var(--muted);font-size:.85rem;border
 footer a{color:var(--cyan);text-decoration:none}
 footer .fine{margin-top:.75rem;font-size:.75rem;opacity:.7}
 input[type=file]{display:none}
+.hidden{display:none!important}
 @media(max-width:640px){.hero h1{font-size:1.6rem}header{padding:.8rem 1rem}}
 </style>
 </head>
@@ -94,24 +125,55 @@ input[type=file]{display:none}
     <img src="assets/neurastage-logo.jpg" alt="NeuraStage logo">
     <span class="brand-title">Neura<span class="stage">Stage</span></span>
   </a>
-  <span class="badge">PWA Engine v1.0</span>
+  <div style="display:flex;gap:.5rem;align-items:center">
+    <span class="pro-badge" id="proBadge">PRO</span>
+    <span class="badge" id="planBadge">Free Trial</span>
+  </div>
 </header>
 
 <main>
   <section class="hero">
     <img src="assets/neurastage-logo.jpg" alt="NeuraStage">
-    <h1>Turn your company data into <span class="accent">AI-ready format</span></h1>
-    <p>Paste messy exports, scraped pages, or internal docs. NeuraStage strips the noise, redacts PII, and hands you clean, chunked JSON — ready to feed your RAG pipeline or LLM. Everything runs in your browser. Your data never leaves your device.</p>
+    <h1>Turn your customer data into <span class="accent">AI-ready format</span></h1>
+    <p>Import your customer CSV, map the columns, and export clean, PII-scrubbed, chunked JSON — ready to feed your RAG pipeline, chatbot, or LLM. Everything runs in your browser. Your data never leaves your device.</p>
   </section>
 
   <section class="card">
-    <h2>1 · Raw Unstructured Import</h2>
-    <textarea id="rawInput" placeholder="Paste HTML, text, CSV exports, scraped pages, reports..."></textarea>
-    <div class="btn-row">
-      <button class="btn-ghost" onclick="loadSample()">Load Sample</button>
-      <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Import File</button>
-      <input type="file" id="fileInput" accept=".txt,.html,.htm,.md,.csv,.json" onchange="importFile(event)">
-      <button class="btn-primary" onclick="runPipeline()">Run NeuraStage Pipeline</button>
+    <div class="tabs">
+      <div class="tab active" id="tabText" onclick="setMode('text')">Text / HTML</div>
+      <div class="tab" id="tabCsv" onclick="setMode('csv')">Customer CSV</div>
+    </div>
+
+    <div id="paneText">
+      <h2>Raw Unstructured Import</h2>
+      <textarea id="rawInput" placeholder="Paste HTML, text, exports, scraped pages, reports..."></textarea>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="loadSample()">Load Sample</button>
+        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Import File</button>
+        <input type="file" id="fileInput" accept=".txt,.html,.htm,.md,.csv,.json" onchange="importFile(event)">
+        <button class="btn-primary" onclick="runTextPipeline()">Run NeuraStage Pipeline</button>
+      </div>
+    </div>
+
+    <div id="paneCsv" class="hidden">
+      <h2>Customer CSV Import</h2>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem">Upload a CSV of customer records. Map each column to a standard field, then stage the whole file into AI-ready JSON.</p>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="document.getElementById('csvInput').click()">Choose CSV File</button>
+        <input type="file" id="csvInput" accept=".csv,.txt" onchange="importCSV(event)">
+        <button class="btn-ghost" onclick="loadCsvSample()">Load Sample CSV</button>
+      </div>
+      <div id="mapWrap" class="hidden">
+        <table class="map-table">
+          <thead><tr><th>CSV Column</th><th>Sample Value</th><th>Map To Field</th></tr></thead>
+          <tbody id="mapBody"></tbody>
+        </table>
+        <label class="checkbox-row"><input type="checkbox" id="redactToggle" checked> Redact PII (emails, phones, SSNs, card numbers)</label>
+        <div class="btn-row">
+          <button class="btn-primary" onclick="runCsvPipeline()">Stage <span id="rowCountLabel"></span> Records</button>
+        </div>
+        <div class="trial-note" id="trialNote"></div>
+      </div>
     </div>
   </section>
 
@@ -124,7 +186,7 @@ input[type=file]{display:none}
 
   <section class="card">
     <div class="status-line"><span class="status-dot" id="statusDot"></span><span id="statusTag">Awaiting Ingestion</span></div>
-    <h2>2 · NeuraStage Vector Payload</h2>
+    <h2>NeuraStage Vector Payload</h2>
     <pre id="cleanOutput">// Cleaned, chunked JSON payload will appear here...</pre>
     <div class="btn-row">
       <button class="btn-green" id="copyBtn" onclick="copyPayload()" disabled>Copy JSON</button>
@@ -133,22 +195,76 @@ input[type=file]{display:none}
   </section>
 
   <section class="card">
+    <h2>Pricing</h2>
+    <div class="pricing">
+      <div class="tier">
+        <h3>Free Trial</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>Text / HTML pipeline</li>
+          <li>CSV import up to 25 rows</li>
+          <li>PII redaction</li>
+          <li>Copy JSON output</li>
+        </ul>
+        <button class="btn-ghost" onclick="setMode('text')">Start Free</button>
+      </div>
+      <div class="tier pro">
+        <h3>Pro — One-Time</h3>
+        <div class="price">$79.99 <small>once, yours forever</small></div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Unlimited CSV rows</li>
+          <li>Column mapping + batch staging</li>
+          <li>Download .json payloads</li>
+          <li>Priority support from Toastid Tech</li>
+        </ul>
+        <button class="btn-primary" onclick="openPaywall()">Unlock Pro — $79.99</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
     <h2>How it works</h2>
     <div class="how">
-      <div class="step"><div class="n">01</div><h3>Ingest</h3><p>Paste or import raw HTML, text, CSV, or markdown. Messy exports welcome.</p></div>
-      <div class="step"><div class="n">02</div><h3>Sanitize</h3><p>Scripts, tags, boilerplate, and duplicate lines are stripped. Emails, phone numbers, SSNs, and card numbers are redacted.</p></div>
-      <div class="step"><div class="n">03</div><h3>Stage</h3><p>Clean text is split into overlapping vector-ready chunks with a deterministic JSON payload — copy it or download it.</p></div>
+      <div class="step"><div class="n">01</div><h3>Import</h3><p>Upload a customer CSV or paste raw text and HTML. Messy exports welcome.</p></div>
+      <div class="step"><div class="n">02</div><h3>Map &amp; Sanitize</h3><p>Map columns to standard fields. Scripts, tags, boilerplate, and duplicates are stripped; PII is redacted.</p></div>
+      <div class="step"><div class="n">03</div><h3>Stage</h3><p>Every record becomes clean, overlapping vector-ready chunks in one deterministic JSON payload — copy it or download it.</p></div>
     </div>
   </section>
 
   <section class="cta">
-    <h2>Your data is only as smart as its staging.</h2>
-    <p>NeuraStage is the free front door. For companies that want this wired into their real pipelines — automated ingestion, vector stores, custom AI on top of their own data — we build it end to end.</p>
+    <h2>Sitting on years of customer data?</h2>
+    <p>NeuraStage is the self-serve front door. For companies that want this wired into their real pipelines — automated ingestion, vector stores, custom AI on top of their own data — we build it end to end.</p>
     <a href="mailto:info@toastidtech.com?subject=NeuraStage%20consult%20request&body=Hi%20Sean%2C%0A%0AI%20tried%20NeuraStage%20and%20I%27d%20like%20to%20talk%20about%20getting%20our%20company%20data%20AI-ready.%0A%0ACompany%3A%20%0AWhat%20data%20are%20we%20sitting%20on%3A%20%0A%0AThanks!" style="text-decoration:none">
       <button class="btn-primary">Get a Free AI-Readiness Consult</button>
     </a>
   </section>
 </main>
+
+<div class="modal-bg" id="paywallModal">
+  <div class="modal">
+    <h2>NeuraStage Pro</h2>
+    <div class="price-big">$79.99</div>
+    <p>One-time payment. Unlimited CSV rows, column mapping, batch staging, and JSON downloads — yours forever.</p>
+    <div id="payStep1">
+      <a id="paypalBtn" href="https://www.paypal.com/ncp/payment/REPLACE_WITH_YOUR_LINK" target="_blank" rel="noopener" style="text-decoration:none">
+        <button class="btn-primary" style="width:100%" onclick="beginCheckout()">Pay $79.99 with PayPal</button>
+      </a>
+      <div class="btn-row" style="justify-content:center;margin-top:.75rem">
+        <button class="btn-ghost" onclick="showCodeStep()">I've completed my purchase</button>
+      </div>
+    </div>
+    <div id="payStep2" class="hidden">
+      <p>Enter the activation code from your receipt email:</p>
+      <input id="codeInput" placeholder="NS-XXXX-XXXXXX" maxlength="14" autocomplete="off">
+      <button class="btn-green" style="width:100%" onclick="activatePro()">Activate Pro</button>
+      <p class="fine">Didn't get a code? Email your PayPal receipt to info@toastidtech.com and we'll send one over.</p>
+    </div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem">
+      <button class="btn-ghost" onclick="closePaywall()">Close</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   Built by <a href="https://toastidtech.com">Toastid Tech, LLC</a> · <a href="https://toastidtech.com/products.html">More AI tools</a>
@@ -156,11 +272,71 @@ input[type=file]{display:none}
 </footer>
 
 <script>
+/* ============ config ============ */
+const PRO_CODE = "NS-BL43-TM7O2Z";            // Pro activation code (set at build time)
+const PAYPAL_LINK = "https://www.paypal.com/ncp/payment/REPLACE_WITH_YOUR_LINK";
+const FREE_ROW_LIMIT = 25;
+const isPro = () => localStorage.getItem('neurastage_pro') === '1';
+
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
 const PHONE_RE = /(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}\b/g;
 const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/g;
 const CARD_RE = /\b(?:\d[ -]*?){13,16}\b/g;
 
+const FIELD_OPTIONS = ["ignore","full_name","first_name","last_name","email","phone","address","city","state","zip","company","notes"];
+const FIELD_LABELS = {ignore:"Ignore",full_name:"Full Name",first_name:"First Name",last_name:"Last Name",email:"Email",phone:"Phone",address:"Address",city:"City",state:"State",zip:"ZIP",company:"Company",notes:"Notes"};
+
+let lastPayload = null;
+let csvHeaders = [], csvRows = [];
+
+/* ============ ui ============ */
+function setMode(m){
+  const text = m === 'text';
+  document.getElementById('tabText').classList.toggle('active', text);
+  document.getElementById('tabCsv').classList.toggle('active', !text);
+  document.getElementById('paneText').classList.toggle('hidden', !text);
+  document.getElementById('paneCsv').classList.toggle('hidden', text);
+}
+function setStatus(msg, ok){
+  document.getElementById('statusTag').textContent = msg;
+  document.getElementById('statusDot').className = 'status-dot' + (ok ? ' live' : '');
+}
+function refreshPlanBadge(){
+  const pro = isPro();
+  document.getElementById('proBadge').style.display = pro ? 'inline-block' : 'none';
+  document.getElementById('planBadge').textContent = pro ? 'Pro Active' : 'Free Trial';
+  document.getElementById('planBadge').style.borderColor = pro ? 'var(--green)' : 'var(--cyan)';
+  document.getElementById('planBadge').style.color = pro ? 'var(--green)' : 'var(--cyan)';
+}
+
+/* ============ paywall ============ */
+function openPaywall(){
+  document.getElementById('payStep1').classList.remove('hidden');
+  document.getElementById('payStep2').classList.add('hidden');
+  document.getElementById('paywallModal').classList.add('open');
+}
+function closePaywall(){ document.getElementById('paywallModal').classList.remove('open'); }
+function beginCheckout(){ gtag('event','begin_checkout',{value:79.99,currency:'USD'}); }
+function showCodeStep(){
+  document.getElementById('payStep1').classList.add('hidden');
+  document.getElementById('payStep2').classList.remove('hidden');
+}
+function activatePro(){
+  const v = document.getElementById('codeInput').value.trim().toUpperCase();
+  if(v && v === PRO_CODE){
+    localStorage.setItem('neurastage_pro','1');
+    refreshPlanBadge();
+    closePaywall();
+    setStatus('NeuraStage Pro activated — welcome aboard', true);
+    gtag('event','purchase',{value:79.99,currency:'USD'});
+    const n = document.getElementById('trialNote');
+    if(n){ n.style.display='none'; }
+  } else {
+    setStatus('That code did not match — check your receipt email', false);
+  }
+}
+
+/* ============ text pipeline ============ */
 const sampleRaw = `
 <div class="ad-banner">BUY NOW! SPECIAL OFFER</div>
 <h1>   Customer Report: Quarterly Analytics   </h1>
@@ -171,140 +347,252 @@ const sampleRaw = `
 <div class="footer-links">Privacy | Terms | Unsubscribe</div>
 <div class="footer-links">Privacy | Terms | Unsubscribe</div>
 `;
-
-let lastPayload = null;
-
 function loadSample(){ document.getElementById('rawInput').value = sampleRaw.trim(); }
 function importFile(e){
-  const f = e.target.files[0];
-  if(!f) return;
+  const f = e.target.files[0]; if(!f) return;
   const r = new FileReader();
   r.onload = () => { document.getElementById('rawInput').value = String(r.result).slice(0, 200000); };
-  r.readAsText(f);
-  e.target.value = '';
+  r.readAsText(f); e.target.value = '';
 }
-
 function stripNoise(raw){
   let t = raw.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ' ');
   t = t.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, ' ');
   t = t.replace(/<!--[\s\S]*?-->/g, ' ');
   t = t.replace(/<[^>]+>/g, ' ');
-  // split lines, trim, drop empties, dedupe repeated boilerplate
   const seen = new Set();
-  const lines = t.split(/\r?\n/).map(l => l.replace(/\s+/g,' ').trim())
+  return t.split(/\r?\n/).map(l => l.replace(/\s+/g,' ').trim())
     .filter(l => l.length > 0)
-    .filter(l => { if(seen.has(l)) return false; seen.add(l); return true; });
-  return lines.join('\n').trim();
+    .filter(l => { if(seen.has(l)) return false; seen.add(l); return true; })
+    .join('\n').trim();
 }
-
 function redactPII(text){
   let count = 0;
-  const red = (re, label) => {
-    text = text.replace(re, (m) => { count++; return '[' + label + ']'; });
-  };
-  red(EMAIL_RE, 'REDACTED_EMAIL');
-  red(SSN_RE, 'REDACTED_SSN');
-  red(CARD_RE, 'REDACTED_CARD');
-  red(PHONE_RE, 'REDACTED_PHONE');
+  const red = (re, label) => { text = text.replace(re, () => { count++; return '['+label+']'; }); };
+  red(EMAIL_RE,'REDACTED_EMAIL'); red(SSN_RE,'REDACTED_SSN'); red(CARD_RE,'REDACTED_CARD'); red(PHONE_RE,'REDACTED_PHONE');
   return { text, count };
 }
-
 function chunkText(text, target = 1200, overlap = 150){
   if(!text) return [];
-  const chunks = [];
-  let i = 0, n = 1;
+  const chunks = []; let i = 0, n = 1;
   while(i < text.length){
     let end = Math.min(i + target, text.length);
     if(end < text.length){
-      // try to break at a sentence or newline
       const slice = text.slice(i, end);
       const brk = Math.max(slice.lastIndexOf('. '), slice.lastIndexOf('\n'));
       if(brk > target * 0.5) end = i + brk + 1;
     }
     const piece = text.slice(i, end).trim();
-    if(piece) chunks.push({ chunk_id: 'chk_' + String(n).padStart(2,'0'), tokens_approx: Math.ceil(piece.length / 4), text_payload: piece });
+    if(piece) chunks.push({ chunk_id:'chk_'+String(n).padStart(2,'0'), tokens_approx:Math.ceil(piece.length/4), text_payload:piece });
     if(end >= text.length) break;
-    i = Math.max(i + 1, end - overlap);
-    n++;
+    i = Math.max(i + 1, end - overlap); n++;
   }
   return chunks;
 }
-
-function qualityScore(rawLen, cleanLen, piiCount, chunkCount){
-  if(rawLen === 0) return 0;
-  const retention = cleanLen / rawLen;               // 0..1
-  let score = 0.55 + retention * 0.25;               // base on how much signal survived
-  if(piiCount > 0) score += 0.10;                    // PII handled
-  if(chunkCount > 1) score += 0.05;                  // chunked for vectors
-  if(chunkCount > 0 && cleanLen > 50) score += 0.05; // non-trivial content
-  return Math.min(0.99, Math.round(score * 100) / 100);
-}
-
-function runPipeline(){
+function runTextPipeline(){
   const raw = document.getElementById('rawInput').value;
   if(!raw || !raw.trim()){ setStatus('Paste or import some data first', false); return; }
   setStatus('Processing...', true);
   document.getElementById('copyBtn').disabled = true;
   document.getElementById('dlBtn').disabled = true;
-
   setTimeout(() => {
     const cleaned = stripNoise(raw);
     const { text: sanitized, count: piiCount } = redactPII(cleaned);
     const chunks = chunkText(sanitized);
-    const payload = {
+    lastPayload = {
       pipeline_id: 'ns_' + Math.random().toString(36).slice(2, 11),
       timestamp: new Date().toISOString(),
-      engine: 'neurastage-pwa-1.0',
-      metadata: {
-        source: 'raw_import',
-        quality_score: qualityScore(raw.length, sanitized.length, piiCount, chunks.length),
-        pii_redactions: piiCount,
-        chunk_count: chunks.length
-      },
+      engine: 'neurastage-pwa-1.1',
+      metadata: { source:'raw_import', quality_score: textQuality(raw.length, sanitized.length, piiCount, chunks.length),
+                  pii_redactions: piiCount, chunk_count: chunks.length },
       vector_chunks: chunks
     };
-    lastPayload = payload;
-
-    document.getElementById('cleanOutput').textContent = JSON.stringify(payload, null, 2);
-
-    const reduction = raw.length ? Math.max(0, Math.round(((raw.length - sanitized.length) / raw.length) * 100)) : 0;
-    const savedTokens = Math.max(0, Math.ceil((raw.length - sanitized.length) / 4));
-    document.getElementById('noiseStat').textContent = reduction + '%';
-    document.getElementById('tokenStat').textContent = savedTokens.toLocaleString();
-    document.getElementById('chunkStat').textContent = chunks.length;
-    document.getElementById('piiStat').textContent = piiCount;
-    document.getElementById('copyBtn').disabled = false;
-    document.getElementById('dlBtn').disabled = false;
+    renderResult(lastPayload, raw.length, sanitized.length, piiCount, chunks.length, 0);
     setStatus('Staged & Clean — ' + chunks.length + ' chunk' + (chunks.length === 1 ? '' : 's') + ' ready', true);
-    gtag('event', 'pipeline_run', { chunks: chunks.length, pii_redactions: piiCount });
+    gtag('event','pipeline_run',{mode:'text',chunks:chunks.length});
   }, 350);
 }
-
-function setStatus(msg, ok){
-  document.getElementById('statusTag').textContent = msg;
-  const dot = document.getElementById('statusDot');
-  dot.className = 'status-dot' + (ok ? ' live' : '');
+function textQuality(rawLen, cleanLen, piiCount, chunkCount){
+  if(rawLen === 0) return 0;
+  let s = 0.55 + (cleanLen / rawLen) * 0.25;
+  if(piiCount > 0) s += 0.10;
+  if(chunkCount > 1) s += 0.05;
+  if(chunkCount > 0 && cleanLen > 50) s += 0.05;
+  return Math.min(0.99, Math.round(s * 100) / 100);
 }
 
+/* ============ csv pipeline ============ */
+function parseCSV(text){
+  const rows = []; let row = [], val = '', inQ = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    if(inQ){
+      if(c === '"'){ if(text[i+1] === '"'){ val += '"'; i++; } else inQ = false; }
+      else val += c;
+    } else {
+      if(c === '"') inQ = true;
+      else if(c === ','){ row.push(val); val = ''; }
+      else if(c === '\n' || c === '\r'){
+        if(c === '\r' && text[i+1] === '\n') i++;
+        row.push(val); val = '';
+        if(row.length > 1 || row[0] !== '') rows.push(row);
+        row = [];
+      }
+      else val += c;
+    }
+  }
+  row.push(val);
+  if(row.length > 1 || row[0] !== '') rows.push(row);
+  return rows.filter(r => r.some(v => String(v).trim() !== ''));
+}
+function guessField(header){
+  const h = header.toLowerCase().replace(/[^a-z]/g,'');
+  if(/email|e-mail/.test(h)) return 'email';
+  if(/phone|mobile|tel|cell/.test(h)) return 'phone';
+  if(/first|fname|given/.test(h)) return 'first_name';
+  if(/last|lname|surname|family/.test(h)) return 'last_name';
+  if(/(^|_)name$|fullname|customername|contactname/.test(h)) return 'full_name';
+  if(/address|street/.test(h)) return 'address';
+  if(/^city$/.test(h)) return 'city';
+  if(/state|province/.test(h)) return 'state';
+  if(/zip|postal/.test(h)) return 'zip';
+  if(/company|business|org/.test(h)) return 'company';
+  if(/note|comment|memo/.test(h)) return 'notes';
+  return 'ignore';
+}
+const csvSample = `Name,Email,Phone,City,Notes
+"Amelia Hart",amelia.hart@example.com,479-555-0119,Fort Smith,"VIP customer, prefers email"
+"Marcus Webb",marcus.w@example.com,(479) 555-0143,Van Buren,"Called 2026-09-01 about quote"
+"Priya Nair",priya.nair@example.com,4795550177,Fayetteville,""
+"Tom Becker",tom.b@example.com,479-555-0120,Rogers,"Do not call after 6pm"`;
+
+function loadCsvSample(){ ingestCSV(csvSample); }
+function importCSV(e){
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => ingestCSV(String(r.result).slice(0, 2000000));
+  r.readAsText(f); e.target.value = '';
+}
+function ingestCSV(text){
+  const rows = parseCSV(text);
+  if(rows.length < 2){ setStatus('CSV needs a header row plus at least one data row', false); return; }
+  csvHeaders = rows[0].map(h => String(h).trim());
+  csvRows = rows.slice(1);
+  const body = document.getElementById('mapBody');
+  body.innerHTML = '';
+  csvHeaders.forEach((h, i) => {
+    const sample = (csvRows[0] && csvRows[0][i] !== undefined) ? String(csvRows[0][i]).slice(0, 40) : '';
+    const tr = document.createElement('tr');
+    const sel = FIELD_OPTIONS.map(f => `<option value="${f}"${guessField(h) === f ? ' selected' : ''}>${FIELD_LABELS[f]}</option>`).join('');
+    tr.innerHTML = `<td class="hdr">${h.replace(/</g,'&lt;')}</td><td>${sample.replace(/</g,'&lt;') || '<span style="color:var(--muted)">—</span>'}</td><td><select data-col="${i}">${sel}</select></td>`;
+    body.appendChild(tr);
+  });
+  document.getElementById('mapWrap').classList.remove('hidden');
+  document.getElementById('rowCountLabel').textContent = csvRows.length.toLocaleString();
+  setStatus(csvRows.length.toLocaleString() + ' rows loaded — map columns, then stage', true);
+}
+function getFieldMap(){
+  const map = {};
+  document.querySelectorAll('#mapBody select').forEach(s => { map[parseInt(s.dataset.col, 10)] = s.value; });
+  return map;
+}
+function runCsvPipeline(){
+  if(!csvRows.length){ setStatus('Import a CSV first', false); return; }
+  const pro = isPro();
+  const fieldMap = getFieldMap();
+  const redact = document.getElementById('redactToggle').checked;
+  let rows = csvRows;
+  let capped = false;
+  if(!pro && rows.length > FREE_ROW_LIMIT){ rows = rows.slice(0, FREE_ROW_LIMIT); capped = true; }
+
+  setStatus('Staging ' + rows.length + ' records...', true);
+  document.getElementById('copyBtn').disabled = true;
+  document.getElementById('dlBtn').disabled = true;
+
+  setTimeout(() => {
+    let totalPII = 0, totalChunks = 0, filled = 0, possible = 0;
+    const records = rows.map((r, ri) => {
+      const fields = {};
+      Object.keys(fieldMap).forEach(ci => {
+        const target = fieldMap[ci];
+        if(target === 'ignore') return;
+        let v = String(r[parseInt(ci, 10)] !== undefined ? r[ci] : '').trim();
+        possible++;
+        if(v){
+          filled++;
+          if(redact){
+            const res = redactPII(v);
+            v = res.text; totalPII += res.count;
+          }
+        }
+        if(v || !(target in fields)) fields[target] = v;
+      });
+      const blob = Object.keys(fields).filter(k => fields[k]).map(k => FIELD_LABELS[k] + ': ' + fields[k]).join('\n');
+      const chunks = chunkText(blob, 1200, 150);
+      totalChunks += chunks.length;
+      return { record_id: 'rec_' + String(ri + 1).padStart(3, '0'), fields, chunks };
+    });
+
+    const fillRate = possible ? filled / possible : 0;
+    const quality = Math.min(0.99, Math.round((0.55 + fillRate * 0.30 + (totalPII > 0 ? 0.10 : 0) + 0.04) * 100) / 100);
+
+    lastPayload = {
+      pipeline_id: 'ns_' + Math.random().toString(36).slice(2, 11),
+      timestamp: new Date().toISOString(),
+      engine: 'neurastage-pwa-1.1',
+      metadata: { source: 'csv_import', row_count: rows.length, total_rows_in_file: csvRows.length,
+                  quality_score: quality, pii_redactions: totalPII, chunk_count: totalChunks, pro },
+      field_map: Object.fromEntries(Object.keys(fieldMap).map(ci => [csvHeaders[ci], FIELD_LABELS[fieldMap[ci]]])),
+      records
+    };
+    renderResult(lastPayload, 0, 0, totalPII, totalChunks, rows.length);
+    setStatus('Staged & Clean — ' + rows.length + ' records, ' + totalChunks + ' chunks ready', true);
+    gtag('event', 'pipeline_run', { mode: 'csv', records: rows.length, pro });
+
+    const note = document.getElementById('trialNote');
+    if(capped){
+      note.style.display = 'block';
+      note.innerHTML = `Free trial staged the first <b>${FREE_ROW_LIMIT}</b> of <b>${csvRows.length.toLocaleString()}</b> rows. <a onclick="openPaywall()">Unlock Pro ($79.99 one-time)</a> for unlimited rows.`;
+    } else {
+      note.style.display = 'none';
+    }
+  }, 400);
+}
+
+/* ============ output ============ */
+function renderResult(payload, rawLen, cleanLen, piiCount, chunkCount, recCount){
+  document.getElementById('cleanOutput').textContent = JSON.stringify(payload, null, 2);
+  const reduction = rawLen ? Math.max(0, Math.round(((rawLen - cleanLen) / rawLen) * 100)) : 0;
+  const savedTokens = rawLen ? Math.max(0, Math.ceil((rawLen - cleanLen) / 4)) : 0;
+  document.getElementById('noiseStat').textContent = reduction + '%';
+  document.getElementById('tokenStat').textContent = savedTokens.toLocaleString();
+  document.getElementById('chunkStat').textContent = chunkCount;
+  document.getElementById('piiStat').textContent = piiCount;
+  document.getElementById('copyBtn').disabled = false;
+  document.getElementById('dlBtn').disabled = isPro() ? false : (recCount > 0 && !isPro() ? true : false);
+  if(recCount > 0 && !isPro()) document.getElementById('dlBtn').disabled = true;
+}
 function copyPayload(){
   if(!lastPayload) return;
   navigator.clipboard.writeText(JSON.stringify(lastPayload, null, 2))
     .then(() => setStatus('Payload copied to clipboard', true))
     .catch(() => setStatus('Copy failed — select the JSON manually', false));
 }
-
 function downloadPayload(){
   if(!lastPayload) return;
+  if(!isPro() && lastPayload.metadata && lastPayload.metadata.source === 'csv_import'){
+    openPaywall(); return;
+  }
   const blob = new Blob([JSON.stringify(lastPayload, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = lastPayload.pipeline_id + '.json';
-  document.body.appendChild(a);
-  a.click();
+  document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-  gtag('event', 'payload_download', {});
+  gtag('event', 'payload_download', { pro: isPro() });
 }
 
+document.getElementById('paypalBtn').href = PAYPAL_LINK;
+refreshPlanBadge();
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW skipped:', err));
