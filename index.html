@@ -328,7 +328,7 @@ function activatePro(){
     refreshPlanBadge();
     closePaywall();
     setStatus('NeuraStage Pro activated — welcome aboard', true);
-    gtag('event','purchase',{value:79.99,currency:'USD'});
+    gtag('event','purchase',{value:79.99,currency:'USD',transaction_id:'neurastage-'+Date.now(),items:[{item_id:'neurastage-pro',item_name:'NeuraStage Pro',price:79.99,quantity:1}]});
     const n = document.getElementById('trialNote');
     if(n){ n.style.display='none'; }
   } else {
